@@ -5,11 +5,12 @@ html, body {
     color: #776e65;
     font-family: "Montserrat";
     font-size: 18px;
-    background-image:url('') 
+    background-image:  url("tenor.gif");
+    background-color: #cccccc;
   }
   
   body {
-    margin: 20px 0;  
+    margin: 7%;  
   }
   
   .heading:after {
@@ -19,11 +20,21 @@ html, body {
   }
   
   h1.title {
-    font-size: 80px;
+    font-size: 90px;
     font-weight: bold;
     margin: 0;
+    color: #edc22e;
     display: block;
     float: left;
+  }
+  span.title {
+    font-size: 45px;
+    font-weight: bold;
+    margin: 0;
+    color: #edc22e;
+    display: block;
+    float: left;
+    margin-left: 10%;
   }
   .score-container {
     position: relative;
@@ -43,7 +54,7 @@ html, body {
     position: relative;
     float: right;
     background: #bbada0;
-    padding: 15px 25px;
+    padding: 15px 40px;
     font-size: 25px;
     height: 25px;
     line-height: 47px;
@@ -65,6 +76,32 @@ html, body {
     color: #eee4da;
   }
   .score-container .score-addition {
+    position: absolute;
+    right: 30px;
+    color: red;
+    font-size: 25px;
+    line-height: 25px;
+    font-weight: bold;
+    color: rgba(119, 110, 101, 0.9);
+    z-index: 100;
+    -webkit-animation: move-up 600ms ease-in;
+    -moz-animation: move-up 600ms ease-in;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+  }
+  .bestscore-container:after {
+    position: absolute;
+    width: 100%;
+    top: 10px;
+    left: 0;
+    content: "Best-score";
+    text-transform: uppercase;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: center;
+    color: #eee4da;
+  }
+  .bestscore-container .bestscore-addition {
     position: absolute;
     right: 30px;
     color: red;
@@ -151,7 +188,7 @@ html, body {
   }
   .game-container .game-message a {
     display: inline-block;
-    background: #8f7a66;
+    background: #8f8b66;
     border-radius: 3px;
     padding: 0 20px;
     text-decoration: none;
@@ -186,12 +223,12 @@ html, body {
   }
   
   .grid-cell {
-    width: 106.25px;
-    height: 106.25px;
+    width: 106.30px;
+    height: 106.30px;
     margin-right: 15px;
     float: left;
     border-radius: 3px;
-    background: rgba(238, 228, 218, 0.35);
+    background: rgba(212, 186, 37, 0.699);
   }
   .grid-cell:last-child {
     margin-right: 0;
@@ -203,9 +240,9 @@ html, body {
   }
   
   .tile {
-    width: 106.25px;
-    height: 106.25px;
-    line-height: 116.25px;
+    width: 106.30px;
+    height: 106.30px;
+    line-height: 116.30px;
   }
   .tile.tile-position-1-1 {
     position: absolute;
@@ -215,77 +252,77 @@ html, body {
   .tile.tile-position-1-2 {
     position: absolute;
     left: 0px;
-    top: 121px;
+    top: 120px;
   }
   .tile.tile-position-1-3 {
     position: absolute;
     left: 0px;
-    top: 243px;
+    top: 242px;
   }
   .tile.tile-position-1-4 {
     position: absolute;
     left: 0px;
-    top: 364px;
+    top: 362px;
   }
   .tile.tile-position-2-1 {
     position: absolute;
-    left: 121px;
+    left: 122px;
     top: 0px;
   }
   .tile.tile-position-2-2 {
     position: absolute;
-    left: 121px;
-    top: 121px;
+    left: 122px;
+    top: 122px;
   }
   .tile.tile-position-2-3 {
     position: absolute;
-    left: 121px;
-    top: 243px;
+    left: 122px;
+    top: 242px;
   }
   .tile.tile-position-2-4 {
     position: absolute;
-    left: 121px;
-    top: 364px;
+    left: 122px;
+    top: 362px;
   }
   .tile.tile-position-3-1 {
     position: absolute;
-    left: 243px;
+    left: 242px;
     top: 0px;
   }
   .tile.tile-position-3-2 {
     position: absolute;
-    left: 243px;
-    top: 121px;
+    left: 242px;
+    top: 122px;
   }
   .tile.tile-position-3-3 {
     position: absolute;
-    left: 243px;
-    top: 243px;
+    left: 242px;
+    top: 242px;
   }
   .tile.tile-position-3-4 {
     position: absolute;
-    left: 243px;
-    top: 364px;
+    left: 242px;
+    top: 362px;
   }
   .tile.tile-position-4-1 {
     position: absolute;
-    left: 364px;
+    left: 362px;
     top: 0px;
   }
   .tile.tile-position-4-2 {
     position: absolute;
-    left: 364px;
-    top: 121px;
+    left: 362px;
+    top: 122px;
   }
   .tile.tile-position-4-3 {
     position: absolute;
-    left: 364px;
-    top: 243px;
+    left: 362px;
+    top: 242px;
   }
   .tile.tile-position-4-4 {
     position: absolute;
-    left: 364px;
-    top: 364px;
+    left: 362px;
+    top: 362px;
   }
   
   .tile {
@@ -301,31 +338,31 @@ html, body {
     -moz-transition-property: top, left;
   }
   .tile.tile-2 {
-    background: #eee4da;
+    background: #d4d2d2;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0);
   }
   .tile.tile-4 {
-    background: #ede0c8;
+    background: #3f3e3e;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0);
   }
   .tile.tile-8 {
-    color: #f9f6f2;
-    background: #f2b179;
+    color: #8b8986;
+    background: #f2d679;
   }
   .tile.tile-16 {
-    color: #f9f6f2;
-    background: #f59563;
+    color: #74716d;
+    background: #e24a03;
   }
   .tile.tile-32 {
-    color: #f9f6f2;
-    background: #f67c5f;
+    color: #e24a03;
+    background: #000000;
   }
   .tile.tile-64 {
-    color: #f9f6f2;
-    background: #f65e3b;
+    color: #f2d679;
+    background: #be3a12;
   }
   .tile.tile-128 {
-    color: #f9f6f2;
+    color: #325369;
     background: #edcf72;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.2381), inset 0 0 0 1px rgba(255, 255, 255, 0.14286);
     font-size: 45px;
@@ -474,7 +511,7 @@ html, body {
     }
     .game-container .game-message a {
       display: inline-block;
-      background: #8f7a66;
+      background: #ff7b00;
       border-radius: 3px;
       padding: 0 20px;
       text-decoration: none;
@@ -484,7 +521,7 @@ html, body {
       margin-left: 9px;
     }
     .game-container .game-message.game-won {
-      background: rgba(237, 194, 46, 0.5);
+      background: rgb(237, 192, 46);
       color: #f9f6f2;
     }
     .game-container .game-message.game-won, .game-container .game-message.game-over {
@@ -628,4 +665,128 @@ html, body {
     .game-message .lower {
       margin-top: 30px !important;
     }
+  }
+
+
+  @-webkit-keyframes move-up {
+    0% {
+      top: 25px;
+      opacity: 1;
+    }
   
+    100% {
+      top: -50px;
+      opacity: 0;
+    }
+  }
+  @-moz-keyframes move-up {
+    0% {
+      top: 25px;
+      opacity: 1;
+    }
+  
+    100% {
+      top: -50px;
+      opacity: 0;
+    }
+  }
+  @keyframes move-up {
+    0% {
+      top: 25px;
+      opacity: 1;
+    }
+  
+    100% {
+      top: -50px;
+      opacity: 0;
+    }
+  }
+
+  @-webkit-keyframes appear {
+    0% {
+      opacity: 0;
+      -webkit-transform: scale(0);
+      -moz-transform: scale(0);
+    }
+  
+    100% {
+      opacity: 1;
+      -webkit-transform: scale(1);
+      -moz-transform: scale(1);
+    }
+  }
+  @-moz-keyframes appear {
+    0% {
+      opacity: 0;
+      -webkit-transform: scale(0);
+      -moz-transform: scale(0);
+    }
+  
+    100% {
+      opacity: 1;
+      -webkit-transform: scale(1);
+      -moz-transform: scale(1);
+    }
+  }
+  @keyframes appear {
+    0% {
+      opacity: 0;
+      -webkit-transform: scale(0);
+      -moz-transform: scale(0);
+    }
+  
+    100% {
+      opacity: 1;
+      -webkit-transform: scale(1);
+      -moz-transform: scale(1);
+    }
+  }
+
+  @-webkit-keyframes pop {
+  0% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+  }
+
+  50% {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+  }
+}
+@-moz-keyframes pop {
+  0% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+  }
+
+  50% {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+  }
+}
+@keyframes pop {
+  0% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+  }
+
+  50% {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+  }
+}

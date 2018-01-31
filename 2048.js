@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
       var manager = new GameManager(4, KeyboardInputManager, HTMLActuator);
     });
   });
-  
+  document.cookie = "bestscore";
+  var bs = document.cookie;
   function GameManager(size, InputManager, Actuator) {
     this.size         = size; // taille de la grille
     this.inputManager = new InputManager;
@@ -28,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
   GameManager.prototype.setup = function () {
     this.grid         = new Grid(this.size);
     this.score        = 0;
+    this.bestscore    = bs;
     this.over         = false;
     this.won          = false;
   
@@ -54,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
   
-  // Sends the updated grid to the actuator
+
   GameManager.prototype.actuate = function () {
     this.actuator.actuate(this.grid, {
       score: this.score,
@@ -63,8 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
       won:   this.won
     });
   };
-  
-  // Save all tile positions and remove merger info
+
   GameManager.prototype.prepareTiles = function () {
     this.grid.eachCell(function (x, y, tile) {
       if (tile) {
@@ -73,20 +74,18 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   };
-  
-  // Move a tile and its representation
+
   GameManager.prototype.moveTile = function (tile, cell) {
     this.grid.cells[tile.x][tile.y] = null;
     this.grid.cells[cell.x][cell.y] = tile;
     tile.updatePosition(cell);
   };
-  
-  // Move tiles on the grid in the specified direction
+
   GameManager.prototype.move = function (direction) {
-    // 0: up, 1: right, 2:down, 3: left
+
     var self = this;
   
-    if (this.over || this.won) return; // Don't do anything if the game's over
+    if (this.over || this.won) return; 
   
     var cell, tile;
   
@@ -94,10 +93,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var traversals = this.buildTraversals(vector);
     var moved      = false;
   
-    // Save the current tile positions and remove merger information
+
     this.prepareTiles();
-  
-    // Traverse the grid in the right direction and move tiles
+
     traversals.x.forEach(function (x) {
       traversals.y.forEach(function (y) {
         cell = { x: x, y: y };
@@ -107,28 +105,22 @@ document.addEventListener("DOMContentLoaded", function () {
           var positions = self.findFarthestPosition(cell, vector);
           var next      = self.grid.cellContent(positions.next);
   
-          // Only one merger per row traversal?
           if (next && next.value === tile.value && !next.mergedFrom) {
             var merged = new Tile(positions.next, tile.value * 2);
             merged.mergedFrom = [tile, next];
   
             self.grid.insertTile(merged);
             self.grid.removeTile(tile);
-  
-            // Converge the two tiles' positions
             tile.updatePosition(positions.next);
-  
-            // Update the score
             self.score += merged.value;
   
-            // The mighty 2048 tile
             if (merged.value === 2048) self.won = true;
           } else {
             self.moveTile(tile, positions.farthest);
           }
   
           if (!self.positionsEqual(cell, tile)) {
-            moved = true; // The tile moved from its original cell!
+            moved = true; 
           }
         }
       });
@@ -138,16 +130,14 @@ document.addEventListener("DOMContentLoaded", function () {
       this.addRandomTile();
   
       if (!this.movesAvailable()) {
-        this.over = true; // Game over!
+        this.over = true; 
       }
   
       this.actuate();
     }
   };
   
-  // Get the vector representing the chosen direction
   GameManager.prototype.getVector = function (direction) {
-    // Vectors representing tile movement
     var map = {
       0: { x: 0,  y: -1 }, // up
       1: { x: 1,  y: 0 },  // right
@@ -158,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return map[direction];
   };
   
-  // Build a list of positions to traverse in the right order
+  
   GameManager.prototype.buildTraversals = function (vector) {
     var traversals = { x: [], y: [] };
   
@@ -167,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
       traversals.y.push(pos);
     }
   
-    // Always traverse from the farthest cell in the chosen direction
+    
     if (vector.x === 1) traversals.x = traversals.x.reverse();
     if (vector.y === 1) traversals.y = traversals.y.reverse();
   
@@ -177,7 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
   GameManager.prototype.findFarthestPosition = function (cell, vector) {
     var previous;
   
-    // Progress towards the vector direction until an obstacle is found
     do {
       previous = cell;
       cell     = { x: previous.x + vector.x, y: previous.y + vector.y };
@@ -186,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     return {
       farthest: previous,
-      next: cell // Used to check if a merge is required
+      next: cell
     };
   };
   
@@ -194,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return this.grid.cellsAvailable() || this.tileMatchesAvailable();
   };
   
-  // Check for available matches between tiles (more expensive check)
+  
   GameManager.prototype.tileMatchesAvailable = function () {
     var self = this;
   
@@ -214,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
   
             if (other && other.value === tile.value) {
-              return true; // These two tiles can be merged
+              return true; 
             }
           }
         }
@@ -236,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function () {
     this.build();
   }
   
-  // Build a grid of the specified size
+
   Grid.prototype.build = function () {
     for (var x = 0; x < this.size; x++) {
       var row = this.cells[x] = [];
@@ -247,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
   
-  // Find the first available random position
+
   Grid.prototype.randomAvailableCell = function () {
     var cells = this.availableCells();
   
@@ -268,7 +257,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return cells;
   };
   
-  // Call callback for every cell
+
   Grid.prototype.eachCell = function (callback) {
     for (var x = 0; x < this.size; x++) {
       for (var y = 0; y < this.size; y++) {
@@ -277,12 +266,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
   
-  // Check if there are any cells available
+
   Grid.prototype.cellsAvailable = function () {
     return !!this.availableCells().length;
   };
   
-  // Check if the specified cell is taken
+
   Grid.prototype.cellAvailable = function (cell) {
     return !this.cellOccupied(cell);
   };
@@ -298,8 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return null;
     }
   };
-  
-  // Inserts a tile at its position
+
   Grid.prototype.insertTile = function (tile) {
     this.cells[tile.x][tile.y] = tile;
   };
@@ -317,8 +305,9 @@ document.addEventListener("DOMContentLoaded", function () {
     this.tileContainer    = document.getElementsByClassName("tile-container")[0];
     this.scoreContainer   = document.getElementsByClassName("score-container")[0];
     this.messageContainer = document.getElementsByClassName("game-message")[0];
-  
+    this.bestscoreContainer = document.getElementsByClassName("bestscore-container")[0];
     this.score = 0;
+    this.bestscore = bs;
   }
   
   HTMLActuator.prototype.actuate = function (grid, metadata) {
@@ -337,15 +326,16 @@ document.addEventListener("DOMContentLoaded", function () {
   
       self.updateScore(metadata.score);
   
-      if (metadata.over) self.message(false); // You lose
-      if (metadata.won) self.message(true); // You win!
+      if (metadata.over) self.message(false); 
+      if (metadata.won) self.message(true); 
     });
   };
   
   HTMLActuator.prototype.restart = function () {
     this.clearMessage();
   };
-  
+
+
   HTMLActuator.prototype.clearContainer = function (container) {
     while (container.firstChild) {
       container.removeChild(container.firstChild);
@@ -358,24 +348,22 @@ document.addEventListener("DOMContentLoaded", function () {
     var element   = document.createElement("div");
     var position  = tile.previousPosition || { x: tile.x, y: tile.y };
     positionClass = this.positionClass(position);
-  
-    // We can't use classlist because it somehow glitches when replacing classes
+
     var classes = ["tile", "tile-" + tile.value, positionClass];
     this.applyClasses(element, classes);
   
     element.textContent = tile.value;
   
     if (tile.previousPosition) {
-      // Make sure that the tile gets rendered in the previous position first
       window.requestAnimationFrame(function () {
         classes[2] = self.positionClass({ x: tile.x, y: tile.y });
-        self.applyClasses(element, classes); // Update the position
+        self.applyClasses(element, classes); 
       });
     } else if (tile.mergedFrom) {
       classes.push("tile-merged");
       this.applyClasses(element, classes);
   
-      // Render the tiles that merged
+
       tile.mergedFrom.forEach(function (merged) {
         self.addTile(merged);
       });
@@ -456,11 +444,11 @@ document.addEventListener("DOMContentLoaded", function () {
     var self = this;
   
     var map = {
-      38: 0, // Up
-      39: 1, // Right
-      40: 2, // Down
-      37: 3, // Left
-      75: 0, // vim keybindings
+      38: 0,
+      39: 1,
+      40: 2,
+      37: 3,
+      75: 0, 
       76: 1,
       74: 2,
       72: 3
