@@ -5,7 +5,9 @@ html, body {
     color: #776e65;
     font-family: "Montserrat";
     font-size: 18px;
-    background-image:  url("tenor.gif");
+    background-image:  url("https://media.giphy.com/media/5xtDarHj0ORdxfWtV6g/giphy.gif");
+    background-repeat: no-repeat;
+    background-size:100%;
     background-color: #cccccc;
   }
   
@@ -94,7 +96,7 @@ html, body {
     width: 100%;
     top: 10px;
     left: 0;
-    content: "Best-score";
+    content: "Last-score";
     text-transform: uppercase;
     font-size: 13px;
     line-height: 13px;
@@ -123,7 +125,7 @@ html, body {
   }
   
   a {
-    color: #776e65;
+    color: #fff133;
     font-weight: bold;
     text-decoration: underline;
     cursor: pointer;
@@ -152,7 +154,7 @@ html, body {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
-    background: #bbada0;
+    background: rgba(238, 228, 218);
     border-radius: 6px;
     width: 500px;
     height: 500px;
@@ -167,7 +169,7 @@ html, body {
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(238, 228, 218, 0.5);
+    background: rgba(238, 228, 218);
     z-index: 100;
     text-align: center;
     -webkit-animation: fade-in 800ms ease 1200ms;
@@ -188,7 +190,7 @@ html, body {
   }
   .game-container .game-message a {
     display: inline-block;
-    background: #8f8b66;
+    background: #fae422;
     border-radius: 3px;
     padding: 0 20px;
     text-decoration: none;
@@ -198,7 +200,7 @@ html, body {
     margin-left: 9px;
   }
   .game-container .game-message.game-won {
-    background: rgba(237, 194, 46, 0.5);
+    background: rgba(245, 197, 39, 0.904);
     color: #f9f6f2;
   }
   .game-container .game-message.game-won, .game-container .game-message.game-over {
@@ -228,7 +230,7 @@ html, body {
     margin-right: 15px;
     float: left;
     border-radius: 3px;
-    background: rgba(212, 186, 37, 0.699);
+    background: rgba(238, 228, 218, 0.5);
   }
   .grid-cell:last-child {
     margin-right: 0;
@@ -490,7 +492,7 @@ html, body {
       right: 0;
       bottom: 0;
       left: 0;
-      background: rgba(238, 228, 218, 0.5);
+      background: rgba(214, 211, 7, 0.884);
       z-index: 100;
       text-align: center;
       -webkit-animation: fade-in 800ms ease 1200ms;
@@ -679,28 +681,6 @@ html, body {
       opacity: 0;
     }
   }
-  @-moz-keyframes move-up {
-    0% {
-      top: 25px;
-      opacity: 1;
-    }
-  
-    100% {
-      top: -50px;
-      opacity: 0;
-    }
-  }
-  @keyframes move-up {
-    0% {
-      top: 25px;
-      opacity: 1;
-    }
-  
-    100% {
-      top: -50px;
-      opacity: 0;
-    }
-  }
 
   @-webkit-keyframes appear {
     0% {
@@ -715,66 +695,9 @@ html, body {
       -moz-transform: scale(1);
     }
   }
-  @-moz-keyframes appear {
-    0% {
-      opacity: 0;
-      -webkit-transform: scale(0);
-      -moz-transform: scale(0);
-    }
-  
-    100% {
-      opacity: 1;
-      -webkit-transform: scale(1);
-      -moz-transform: scale(1);
-    }
-  }
-  @keyframes appear {
-    0% {
-      opacity: 0;
-      -webkit-transform: scale(0);
-      -moz-transform: scale(0);
-    }
-  
-    100% {
-      opacity: 1;
-      -webkit-transform: scale(1);
-      -moz-transform: scale(1);
-    }
-  }
+
 
   @-webkit-keyframes pop {
-  0% {
-    -webkit-transform: scale(0);
-    -moz-transform: scale(0);
-  }
-
-  50% {
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-  }
-
-  100% {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-  }
-}
-@-moz-keyframes pop {
-  0% {
-    -webkit-transform: scale(0);
-    -moz-transform: scale(0);
-  }
-
-  50% {
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-  }
-
-  100% {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-  }
-}
-@keyframes pop {
   0% {
     -webkit-transform: scale(0);
     -moz-transform: scale(0);

@@ -1,11 +1,15 @@
+var bs;
+
 document.addEventListener("DOMContentLoaded", function () {
     // attente des infos
     window.requestAnimationFrame(function () {
       var manager = new GameManager(4, KeyboardInputManager, HTMLActuator);
     });
   });
-  document.cookie = "bestscore";
-  var bs = document.cookie;
+
+
+
+
   function GameManager(size, InputManager, Actuator) {
     this.size         = size; // taille de la grille
     this.inputManager = new InputManager;
@@ -29,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
   GameManager.prototype.setup = function () {
     this.grid         = new Grid(this.size);
     this.score        = 0;
-    this.bestscore    = bs;
     this.over         = false;
     this.won          = false;
   
@@ -307,7 +310,6 @@ document.addEventListener("DOMContentLoaded", function () {
     this.messageContainer = document.getElementsByClassName("game-message")[0];
     this.bestscoreContainer = document.getElementsByClassName("bestscore-container")[0];
     this.score = 0;
-    this.bestscore = bs;
   }
   
   HTMLActuator.prototype.actuate = function (grid, metadata) {
@@ -380,7 +382,8 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   
   HTMLActuator.prototype.normalizePosition = function (position) {
-    return { x: position.x + 1, y: position.y + 1 };
+    return { x: position.x + 1, y: position.y + 1 }; 
+    
   };
   
   HTMLActuator.prototype.positionClass = function (position) {
@@ -393,6 +396,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     var difference = score - this.score;
     this.score = score;
+    this.bestscore = score;
   
     this.scoreContainer.textContent = this.score;
   
@@ -402,16 +406,24 @@ document.addEventListener("DOMContentLoaded", function () {
       addition.textContent = "+" + difference;
   
       this.scoreContainer.appendChild(addition);
+      
     }
+
+    if (score != 0){
+    localStorage.setItem('lastscore', score);
+    }
+    document.getElementById("bestscore").innerHTML = localStorage.getItem("lastscore");
+
   };
   
+
   HTMLActuator.prototype.message = function (won) {
     var type    = won ? "game-won" : "game-over";
     var message = won ? "You win!" : "Game over!"
 
-  
     this.messageContainer.classList.add(type);
     this.messageContainer.getElementsByTagName("p")[0].textContent = message;
+
   };
   
   HTMLActuator.prototype.clearMessage = function () {
