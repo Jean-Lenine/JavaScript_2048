@@ -35,7 +35,10 @@ document.addEventListener("DOMContentLoaded", function () {
     this.score        = 0;
     this.over         = false;
     this.won          = false;
-  
+
+    getCookie("bestscore");
+
+    document.getElementById("bestscore").innerHTML = getCookie("bestscore");
     // ajout tille
     this.addStartTiles();
   
@@ -334,10 +337,35 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   
   HTMLActuator.prototype.restart = function () {
+    if (this.score > getCookie("bestscore")) {
+      setCookie("bestscore",this.score,10);
+    }
+
     this.clearMessage();
   };
 
+  function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
 
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
   HTMLActuator.prototype.clearContainer = function (container) {
     while (container.firstChild) {
       container.removeChild(container.firstChild);
@@ -409,12 +437,7 @@ document.addEventListener("DOMContentLoaded", function () {
       
     }
 
-    if (score != 0){
-    localStorage.setItem('lastscore', score);
-    }
-    document.getElementById("bestscore").innerHTML = localStorage.getItem("lastscore");
-
-  };
+  }
   
 
   HTMLActuator.prototype.message = function (won) {
@@ -460,12 +483,58 @@ document.addEventListener("DOMContentLoaded", function () {
       39: 1,
       40: 2,
       37: 3,
-      75: 0, 
-      76: 1,
-      74: 2,
-      72: 3
+      87: 0, 
+      68: 1,
+      83: 2,
+      65: 3,
+      'up':0,
+      'right':1,
+      'down':2,
+      'left':3
     };
+    document.getElementById("up").onclick = function(event){
+      var mapped    = map["up"];
   
+        if (mapped !== undefined) {
+          event.preventDefault();
+          self.emit("move", mapped);
+        }
+  
+        if (event.which === 32) self.restart.bind(self)(event);
+      
+        };
+    document.getElementById("down").onclick = function(event){
+      var mapped    = map["down"];
+  
+        if (mapped !== undefined) {
+          event.preventDefault();
+          self.emit("move", mapped);
+        }
+  
+        if (event.which === 32) self.restart.bind(self)(event);
+      
+    };
+    document.getElementById("left").onclick = function(event){
+      var mapped    = map["left"];
+  
+        if (mapped !== undefined) {
+          event.preventDefault();
+          self.emit("move", mapped);
+        }
+  
+        if (event.which === 32) self.restart.bind(self)(event);
+    };
+    document.getElementById("right").onclick = function(event){
+      var mapped    = map["right"];
+  
+        if (mapped !== undefined) {
+          event.preventDefault();
+          self.emit("move", mapped);
+        }
+  
+        if (event.which === 32) self.restart.bind(self)(event);
+    };
+
     document.addEventListener("keydown", function (event) {
       var modifiers = event.altKey || event.ctrlKey || event.metaKey ||
                       event.shiftKey;

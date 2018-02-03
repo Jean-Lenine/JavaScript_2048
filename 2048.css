@@ -5,16 +5,15 @@ html, body {
     color: #776e65;
     font-family: "Montserrat";
     font-size: 18px;
-    background-image:  url("https://media.giphy.com/media/5xtDarHj0ORdxfWtV6g/giphy.gif");
     background-repeat: no-repeat;
     background-size:100%;
     background-color: #cccccc;
+    height: 100%;
   }
   
   body {
-    margin: 7%;  
+    background-image:  url("https://media.giphy.com/media/5xtDarHj0ORdxfWtV6g/giphy.gif");
   }
-  
   .heading:after {
     content: "";
     display: block;
@@ -38,6 +37,20 @@ html, body {
     float: left;
     margin-left: 10%;
   }
+  .keyup{
+  display: flex;
+  justify-content: center;
+  }
+  .keyldr{
+    display: inline-flex;
+    justify-content: center;
+    margin-left: 40%;
+    width: 20%;
+  }
+  .keyldr button{
+  }
+
+
   .score-container {
     position: relative;
     float: right;
@@ -96,7 +109,7 @@ html, body {
     width: 100%;
     top: 10px;
     left: 0;
-    content: "Last-score";
+    content: "Best-score";
     text-transform: uppercase;
     font-size: 13px;
     line-height: 13px;

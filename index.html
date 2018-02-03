@@ -1,9 +1,9 @@
-<!DOCTYPE html/>
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>2048</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="2048.css" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <title>2048</title>
@@ -53,11 +53,20 @@
           </div>
       
           <div class="tile-container">
-      
           </div>
-        </div>
-      
+        </div> 
       </div>
+
+      <div class="keyup">
+        <button id="up"><img src="png/up.png" height="20" width="20" alt="up"></button>
+      </div>
+
+      <div class="keyldr">
+        <button id="left"><img src="png/left.png" height="20" width="20" alt="left"></button>
+        <button id="down"><img src="png/down.png" height="20" width="20" alt="down"></button>
+        <button id="right"><img src="png/right.png" height="20" width="20" alt="right"></button>
+      </div>
+
       <script src='https://hammerjs.github.io/dist/hammer.min.js'></script>
       <script src='2048.js'></script>
 </body>
